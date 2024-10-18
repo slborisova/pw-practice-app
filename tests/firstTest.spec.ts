@@ -3,33 +3,51 @@ import {test} from '@playwright/test';
 
 test.beforeEach(async ({page}) => {
     await page.goto('http://localhost:4200/');
+    await page.getByText('Forms').click();
+    await page.getByText('Form Layouts').click();
 });
 
-test.describe.only('suite1', () => {
-    test.beforeEach(async ({page}) => {
-        await page.getByText('Charts').click()
-    });
+test('Locator syntax rules', async ({page}) => {
+    // by Tag name
+    await page.locator('input').first().click();
 
-    test('the first test', async ({page}) => {
-        await page.getByText('Form Layouts').click()
-    });
-    
-    test('navigate to datepicker page', async ({page}) => {
-        await page.getByText('Datepicker').click()
-    });
-});
+    // by ID
+    page.locator('#inputEmail1');
 
-test.describe('suite1', () => {
-    test.beforeEach(async ({page}) => {
-        await page.getByText('Forms').click();
-    });
+    // by Class value
+    page.locator('.shape-rectangle');
 
-    test('the first test1', async ({page}) => {
-        await page.getByText('Form Layouts').click();
-    });
-    
-    test('navigate to datepicker page1', async ({page}) => {
-        await page.getByText('Datepicker').click();
-    });
+    // by Attribute
+    page.locator('[placeholder="Email"]');
+
+    // by Class value (full)
+    page.locator('[class="input-full-width size-medium status-basic shape-rectangle nb-transition"]');
+
+    // Combine different selectors
+    page.locator('input[placeholder="Email"][nbinput]');
+
+    // By XPath (not recommended)
+    page.locator('//*[@id="inputEmail1"]');
+
+    // By partial text match
+    page.locator(':text("Using")');
+
+    // By exact text math
+    page.locator(':text-is("Using the Grid")')
 })
 
+test.only('User facing locators', async({page}) => {
+    await page.getByRole('textbox', {name: "Email"}).first().click(); // By Role
+    await page.getByRole('button', {name: "Sign in"}).first().click();
+
+    await page.getByLabel('Email').first().click(); // By Label
+
+    await page.getByPlaceholder('Jane Doe').click(); //By Placeholder
+
+    await page.getByText('Using the Grid').click(); //By Text
+
+    await page.getByTestId('SignIn').click(); // By data test id
+
+    await page.getByTitle('IoT Dashboard').click(); // By Title
+
+})
