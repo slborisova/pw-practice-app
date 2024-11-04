@@ -33,7 +33,7 @@ test("Locator syntax rules", async ({ page }) => {
   // By partial text match
   page.locator(':text("Using")');
 
-  // By exact text math
+  // By exact text match
   page.locator(':text-is("Using the Grid")');
 });
 
