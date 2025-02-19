@@ -11,9 +11,7 @@ test.describe("Form Layouts page", () => {
   });
 
   test("input fields", async ({ page }) => {
-    const usingTheGridEmailInput = page
-      .locator("nb-card", { hasText: "Using the Grid" })
-      .getByRole("textbox", { name: "Email" });
+    const usingTheGridEmailInput = page.locator("nb-card", { hasText: "Using the Grid" }).getByRole("textbox", { name: "Email" });
 
     await usingTheGridEmailInput.fill("test@test.com");
     await usingTheGridEmailInput.clear();
@@ -30,36 +28,18 @@ test.describe("Form Layouts page", () => {
   });
 
   test("radio buttons", async ({ page }) => {
-    const usingTheGridForm = page.locator("nb-card", {
-      hasText: "Using the Grid",
-    });
+    const usingTheGridForm = page.locator("nb-card", {hasText: "Using the Grid"});
 
     // await usingTheGridForm.getByLabel('Option 1').check({force: true}); //1st option
-    await usingTheGridForm
-      .getByRole("radio", { name: "Option 2" })
-      .check({ force: true }); //2nd optionGeneral assertion (is the radio button selected ot not selected)(isChecked(), toBeTruthy())
-    const radioStatus = await usingTheGridForm
-      .getByRole("radio", { name: "Option 1" })
-      .isChecked(); //check the status; return boolean - True or False
+    await usingTheGridForm.getByRole("radio", { name: "Option 2" }).check({ force: true }); //2nd optionGeneral assertion (is the radio button selected ot not selected)(isChecked(), toBeTruthy())
+    const radioStatus = await usingTheGridForm.getByRole("radio", { name: "Option 1" }).isChecked(); //check the status; return boolean - True or False
 
     expect(radioStatus).toBeTruthy();
-    await expect(
-      usingTheGridForm.getByRole("radio", { name: "Option 1" })
-    ).toBeChecked();
+    await expect(usingTheGridForm.getByRole("radio", { name: "Option 1" })).toBeChecked();
 
-    await usingTheGridForm
-      .getByRole("radio", { name: "Option 2" })
-      .check({ force: true });
-    expect(
-      await usingTheGridForm
-        .getByRole("radio", { name: "Option 1" })
-        .isChecked()
-    ).toBeFalsy(); // to validate that it is not checked any more;
-    expect(
-      await usingTheGridForm
-        .getByRole("radio", { name: "Option 2" })
-        .isChecked()
-    ).toBeTruthy(); // to validate that it is checked
+    await usingTheGridForm.getByRole("radio", { name: "Option 2" }).check({ force: true });
+    expect(await usingTheGridForm.getByRole("radio", { name: "Option 1" }).isChecked()).toBeFalsy(); // to validate that it is not checked any more;
+    expect(await usingTheGridForm.getByRole("radio", { name: "Option 2" }).isChecked()).toBeTruthy(); // to validate that it is checked
   });
 });
 
@@ -67,12 +47,8 @@ test("checkboxes", async ({ page }) => {
   await page.getByText("Modal & Overlays").click();
   await page.getByText("Toastr").click();
 
-  await page
-    .getByRole("checkbox", { name: "Hide on click" })
-    .uncheck({ force: true });
-  await page
-    .getByRole("checkbox", { name: "Prevent arising of duplicate toast" })
-    .check({ force: true });
+  await page.getByRole("checkbox", { name: "Hide on click" }).uncheck({ force: true });
+  await page.getByRole("checkbox", { name: "Prevent arising of duplicate toast" }).check({ force: true });
 
   const allBoxes = page.getByRole("checkbox"); //locator for all checkboxes
   for (const box of await allBoxes.all()) {
@@ -132,14 +108,8 @@ test("dialog box", async ({ page }) => {
     dialog.accept();
   });
 
-  await page
-    .getByRole("table")
-    .locator("tr", { hasText: "mdo@gmail.com" })
-    .locator(".nb-trash")
-    .click();
-  await expect(page.locator("table tr").first()).not.toHaveText(
-    "mdo@gmail.com"
-  ); //to be sure email not in the row any more
+  await page.getByRole("table").locator("tr", { hasText: "mdo@gmail.com" }).locator(".nb-trash").click();
+  await expect(page.locator("table tr").first()).not.toHaveText("mdo@gmail.com"); //to be sure email not in the row any more
 });
 
 test("web tables", async ({ page }) => {
@@ -238,4 +208,4 @@ test('sliders', async({ page }) => {
   await page.mouse.move(x + 100, y + 100)
   await page.mouse.up()
   await expect(tempBox).toContainText('30')
-})
+});
