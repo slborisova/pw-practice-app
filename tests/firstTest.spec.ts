@@ -136,10 +136,6 @@ test('Extracting values', async({page}) => {
     expect (placeholderValue).toEqual('Email')
 
 });
-test("Locator syntax rules", async ({ page }) => {
-  // by Tag name
-  await page.locator("input").first().click();
-
 
 test('Assertions', async ({page}) => {
     const basicFormButton = page.locator('nb-card').filter({hasText: "Basic form"}).locator('button');
