@@ -5,6 +5,7 @@ export class NavigationPage extends HelperBase{
    
     constructor(page: Page){
         super(page)
+
     }
 
     async formLayoutsPage(){
