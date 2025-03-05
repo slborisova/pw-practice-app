@@ -161,11 +161,8 @@ test("datepicker", async({page}) => {
   const calendarInputField = page.getByPlaceholder('Form Picker');
   await calendarInputField.click();
 
-
-  // await page.locator('[class="day-cell ng-star-inserted"]').getByText('14', {exact: true}).click();
+ // await page.locator('[class="day-cell ng-star-inserted"]').getByText('14', {exact: true}).click();
 //   await expect(calendarInputField).toHaveValue('Jun 1 2023');
-
-
 
   let date = new Date();
   date.setDate(date.getDate() + 14);
