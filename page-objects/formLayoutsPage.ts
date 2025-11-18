@@ -1,5 +1,4 @@
 import { Page } from "@playwright/test";
-
 import { HelperBase } from "./helperBase";
 export class FormLayoutsPage extends HelperBase{
 
@@ -20,7 +19,7 @@ export class FormLayoutsPage extends HelperBase{
      * This method fill out the inline form with user details
      * @param name - should be first and last name
      * @param email - valid email for the test user
-     * @param rememberMe - true or false if user session to be safed
+     * @param rememberMe - true or false if user session to be saved
      */
     async submitInlineFormWithNameEmailAndCheckbox(name: string, email: string, rememberMe: boolean){
         const inlineForm = this.page.locator("nb-card", {hasText: "Inline form"});
